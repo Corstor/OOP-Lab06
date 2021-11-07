@@ -14,6 +14,7 @@ public final class UseCollection {
 	private final static int MINRANGE = 1_000;
 	private final static int ELEMS = 100_000;
 	private static final int TO_MS = 1_000_000;
+	private static final int NTIMES = 1_000;
 	
 	private static long addElementsFindTime(List<Integer> list, int elems) {
     	long time = System.nanoTime();
@@ -101,7 +102,11 @@ public final class UseCollection {
          * times, use as example TestPerformance.java.
          */
     	
+    	System.out.println("It required " + readMiddleElemFindTime(arrayList, NTIMES) / TO_MS 
+    						+ " ms to read " + NTIMES + " times the middle element of the ArrayList");
     	
+    	System.out.println("It required " + readMiddleElemFindTime(linkedList, NTIMES) / TO_MS 
+				+ " ms to read " + NTIMES + " times the middle element of the LinkedList");
     	
         /*
          * 7) Build a new Map that associates to each continent's name its
