@@ -30,7 +30,7 @@ public final class UseCollection {
     	long time = System.nanoTime();
     	
     	for (int i = 0; i <= elems; i++) {
-            list.add(i);
+            list.add(0, i);
         }
     	
     	return time = System.nanoTime() - time;
