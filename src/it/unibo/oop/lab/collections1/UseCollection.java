@@ -13,6 +13,16 @@ public final class UseCollection {
 	private final static int MAXRANGE = 2000;
 	private final static int MINRANGE = 1000;
 	
+	private static long addElementsFindTime(List<Integer> list, int elems) {
+    	long time = System.nanoTime();
+    	
+    	for (int i = 0; i <= elems; i++) {
+            list.add(i);
+        }
+    	
+    	return time = System.nanoTime() - time;
+    }
+	
     private UseCollection() {
     }
 
