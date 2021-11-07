@@ -46,7 +46,9 @@ public final class UseCollection {
          * (Suggestion: use a temporary variable)
          */
     	
-    	
+    	final var temp = arrayList.get(0);
+    	arrayList.set(0, arrayList.get(arrayList.size()-1));
+    	arrayList.set(arrayList.size()-1, temp);
     	
         /*
          * 4) Using a single for-each, print the contents of the arraylist.
