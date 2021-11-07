@@ -12,6 +12,8 @@ public final class UseCollection {
 	
 	private final static int MAXRANGE = 2000;
 	private final static int MINRANGE = 1000;
+	private final static int ELEMS = 100_000;
+	private static final int TO_MS = 1_000_000;
 	
 	private static long addElementsFindTime(List<Integer> list, int elems) {
     	long time = System.nanoTime();
@@ -76,7 +78,11 @@ public final class UseCollection {
          * TestPerformance.java.
          */
     	
+    	System.out.println("It required " + addElementsFindTime(arrayList, ELEMS) / TO_MS 
+    						+ " ms to add " + ELEMS + " elements into ArrayList");
     	
+    	System.out.println("It required " + addElementsFindTime(linkedList, ELEMS) / TO_MS 
+				+ " ms to add " + ELEMS + " elements into LinkedList");
     	
         /*
          * 6) Measure the performance of reading 1000 times an element whose
