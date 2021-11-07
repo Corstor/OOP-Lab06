@@ -25,6 +25,16 @@ public final class UseCollection {
     	return time = System.nanoTime() - time;
     }
 	
+	private static long readMiddleElemFindTime(List<Integer> list, int ntimes) {
+		long time = System.nanoTime();
+		
+		for (int i = 0; i < ntimes; i++) {
+    		list.get(list.size()/2);
+    	}
+		
+		return time = System.nanoTime() - time;
+	}
+	
     private UseCollection() {
     }
 
