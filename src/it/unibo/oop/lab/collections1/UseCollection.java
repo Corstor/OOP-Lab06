@@ -54,7 +54,9 @@ public final class UseCollection {
          * 4) Using a single for-each, print the contents of the arraylist.
          */
     	
-    	
+    	for (final var i : arrayList) {
+    		System.out.println(i);
+    	}
     	
         /*
          * 5) Measure the performance of inserting new elements in the head of
