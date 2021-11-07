@@ -10,8 +10,8 @@ import java.util.List;
  */
 public final class UseCollection {
 	
-	private final static int MAXRANGE = 2000;
-	private final static int MINRANGE = 1000;
+	private final static int MAXRANGE = 2_000;
+	private final static int MINRANGE = 1_000;
 	private final static int ELEMS = 100_000;
 	private static final int TO_MS = 1_000_000;
 	
@@ -90,7 +90,6 @@ public final class UseCollection {
          * LinkedList, using the collections of point 5. In order to measure
          * times, use as example TestPerformance.java.
          */
-    	
     	
     	
     	
