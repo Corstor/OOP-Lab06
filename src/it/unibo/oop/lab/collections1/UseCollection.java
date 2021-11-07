@@ -1,8 +1,10 @@
 package it.unibo.oop.lab.collections1;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Example class using {@link java.util.List} and {@link java.util.Map}.
@@ -15,6 +17,14 @@ public final class UseCollection {
 	private final static int ELEMS = 100_000;
 	private static final int TO_MS = 1_000_000;
 	private static final int NTIMES = 1_000;
+	
+	//Continents
+	private final static long AFRICA = 1_110_635_000;
+	private final static long AMERICAS = 972_005_000;
+	private final static long ANTARCTICA = 0;
+	private final static long ASIA = 4_298_723_000L;
+	private final static long EUROPE = 742_452_000;
+	private final static long OCEANIA = 38_304_000;
 	
 	private static long addElementsFindTime(List<Integer> list, int elems) {
     	long time = System.nanoTime();
@@ -124,6 +134,16 @@ public final class UseCollection {
          * 
          * Oceania -> 38,304,000
          */
+    	
+    	final Map<String, Long> map = new HashMap<>();
+    	
+    	map.put("Africa", AFRICA);
+    	map.put("Americas", AMERICAS);
+    	map.put("Antarctica", ANTARCTICA);
+    	map.put("Asia", ASIA);
+    	map.put("Europe", EUROPE);
+    	map.put("Oceania", OCEANIA);
+    	
         /*
          * 8) Compute the population of the world
          */
