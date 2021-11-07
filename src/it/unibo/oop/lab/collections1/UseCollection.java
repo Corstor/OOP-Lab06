@@ -147,5 +147,13 @@ public final class UseCollection {
         /*
          * 8) Compute the population of the world
          */
+    	
+    	long worldPopulation = 0;
+    	
+    	for (final var i : map.values()) {
+    		worldPopulation += i;
+    	}
+    	
+    	System.out.println("The world population is: " + worldPopulation);
     }
 }
