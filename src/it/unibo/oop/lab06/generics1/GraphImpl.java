@@ -74,7 +74,7 @@ public class GraphImpl<N> implements Graph<N> {
      * {@inheritDoc}
      */
 	public Set<N> linkedNodes(N node) {
-		return (this.getMap().containsKey(node) && node != null) ? new HashSet<>(this.getMap().get(node)) : null;
+		return (this.getMap().containsKey(node) && node != null) ? new HashSet<>(this.getMap().get(node)) : new HashSet<>();
 	}
 	
 	/**
@@ -112,7 +112,7 @@ public class GraphImpl<N> implements Graph<N> {
 		}
 		
 		//Path didn't find
-		return null;
+		return new LinkedList<>();
 	}
 
 }
