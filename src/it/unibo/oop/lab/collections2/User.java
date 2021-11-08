@@ -11,7 +11,7 @@ public interface User {
     /**
      * Return the age of this user.
      * 
-     * @return age the age of this user
+     * @return the age of this user
      */
     int getAge();
 

@@ -1,7 +1,11 @@
 package it.unibo.oop.lab.collections2;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -29,6 +33,8 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      * 
      * think of what type of keys and values would best suit the requirements
      */
+	
+	private final Map<String , List<U>> followedPeople;
 
     /*
      * [CONSTRUCTORS]
@@ -55,7 +61,13 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      *            application
      */
     public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
-        super(name, surname, user, userAge);
+		super(name, surname, user, userAge);
+		this.followedPeople = new HashMap<>();
+    }
+    
+    public SocialNetworkUserImpl(final String name, final String surname, final String user) {
+		super(name, surname, user);
+		this.followedPeople = new HashMap<>();
     }
 
     /*
@@ -66,17 +78,32 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
 
     @Override
     public boolean addFollowedUser(final String circle, final U user) {
-        return false;
+    	if (!this.followedPeople.containsKey(circle)) {
+    		this.followedPeople.put(circle, new LinkedList<>(Arrays.asList(user)));
+    	} else {
+    		final var tempList = this.getFollowedUsersInGroup(circle);
+    		for (final var i : tempList) {
+    			if (i.equals(user)) {
+    				return false;
+    			}
+    		}
+    		this.getFollowedUsersInGroup(circle).add(user);
+    	}
+        return true;
     }
 
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-        return null;
+        return this.followedPeople.get(groupName);
     }
 
     @Override
     public List<U> getFollowedUsers() {
-        return null;
+    	List<U> tempList = new LinkedList<>();
+    	for (final var i : this.followedPeople.values()) {
+    		tempList.addAll(i);
+    	}
+        return tempList;
     }
 
 }
