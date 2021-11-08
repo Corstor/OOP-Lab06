@@ -33,15 +33,17 @@ public class Robot {
      * Moves the robot up by one unit.
      * 
      * @throws PositionOutOfBoundException
+     * @throws NotEnoughBatteryException
      */
     public void moveUp() {
-        moveToPosition(environment.getCurrPosX(), this.environment.getCurrPosY() + Robot.MOVEMENT_DELTA);
+        this.moveToPosition(environment.getCurrPosX(), this.environment.getCurrPosY() + Robot.MOVEMENT_DELTA);
     }
 
     /**
      * Moves the robot down by one unit.
      * 
      * @throws PositionOutOfBoundException
+     * @throws NotEnoughBatteryException
      */
     public void moveDown() {
         this.moveToPosition(this.environment.getCurrPosX(), environment.getCurrPosY() - Robot.MOVEMENT_DELTA);
@@ -82,14 +84,17 @@ public class Robot {
      * @param newY
      *            the new Y position to move the robot to
      * @throws PositionOutOfBoundException
+     * @throws NotEnoughBatteryException
      */
-    private void moveToPosition(final int newX, final int newY) throws PositionOutOfBoundException {
+    private void moveToPosition(final int newX, final int newY) throws PositionOutOfBoundException, NotEnoughBatteryException {
         if (this.isBatteryEnoughToMove()) {
-            this.environment.move(newX, newY);
+        	this.environment.move(newX, newY);
             this.consumeBatteryForMovement();
+            this.log("Moved to position(" + newX + "," + newY + ").");
         } else {
-        	
+        	throw new NotEnoughBatteryException(this.getBatteryLevel(), Robot.MOVEMENT_DELTA_CONSUMPTION);
         }
+    	
     }
 
     /**

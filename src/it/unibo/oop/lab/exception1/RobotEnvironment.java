@@ -43,8 +43,7 @@ public class RobotEnvironment {
      *            new position on X
      * @param newY
      *            new position on Y
-     * @return A boolean indicating if the robot moved or not (a robot can move
-     *         only inside the environment's boundaries)
+     * @throws PositionOutOfBoundException
      */
     public void move(final int newX, final int newY) throws PositionOutOfBoundException {
         if (newX >= RobotEnvironment.WORLD_X_LOWER_LIMIT
