@@ -1,11 +1,12 @@
 package it.unibo.oop.lab.collections2;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 
@@ -34,7 +35,7 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      * think of what type of keys and values would best suit the requirements
      */
 	
-	private final Map<String , List<U>> followedPeople;
+	private final Map<String , Set<U>> followedPeople;
 
     /*
      * [CONSTRUCTORS]
@@ -65,6 +66,17 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
 		this.followedPeople = new HashMap<>();
     }
     
+    /**
+     * Builds a new {@link SocialNetworkUserImpl}, without a defined age.
+     * 
+     * @param name
+     *            the user firstname
+     * @param surname
+     *            the user lastname
+     * @param user
+     *            alias of the user, i.e. the way a user is identified on an
+     *            application
+     */
     public SocialNetworkUserImpl(final String name, final String surname, final String user) {
 		super(name, surname, user);
 		this.followedPeople = new HashMap<>();
@@ -76,37 +88,39 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
      * Implements the methods below
      */
 
-    @Override
+    /**
+     * {@inheritDoc}
+     */
     public boolean addFollowedUser(final String circle, final U user) {
-    	if (!this.followedPeople.containsKey(circle)) {
-    		this.followedPeople.put(circle, new LinkedList<>(Arrays.asList(user)));
-    	} else {
-    		final var tempList = this.getFollowedUsersInGroupPrivate(circle);
-    		for (final var i : tempList) {
-    			if (i.equals(user)) {
-    				return false;
-    			}
-    		}
-    		this.getFollowedUsersInGroupPrivate(circle).add(user);
+    	Set<U> group = this.followedPeople.get(circle);
+    	
+    	if(group == null) {
+    		group = new HashSet<>();
+    		this.followedPeople.put(circle, group);
     	}
-        return true;
-    }
-
-    private Collection<U> getFollowedUsersInGroupPrivate(final String groupName) {
-    	return this.followedPeople.containsKey(groupName) ? this.followedPeople.get(groupName) : new LinkedList<U>();
+		
+		return group.add(user);
     }
     
-    @Override
+    /**
+    *
+    * [NOTE] If no group with groupName exists yet, this implementation must
+    * return an empty Collection.
+    * 
+    * {@inheritDoc}
+    */
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-    	final Collection<U> tempCollection = new LinkedList<>();
-    	for (final var i : this.getFollowedUsersInGroupPrivate(groupName)) {
-    		tempCollection.add(i);
-    	}
+    	final Collection<U> tempCollection = this.followedPeople.get(groupName);
+        if (tempCollection != null) {
+            return new LinkedList<>(tempCollection);
+        }
     	
-        return tempCollection;
+        return new LinkedList<>();
     }
 
-    @Override
+    /**
+     * {@inheritDoc}
+     */
     public List<U> getFollowedUsers() {
     	List<U> tempList = new LinkedList<>();
     	for (final var i : this.followedPeople.values()) {
