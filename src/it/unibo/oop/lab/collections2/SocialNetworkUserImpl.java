@@ -81,20 +81,29 @@ public class SocialNetworkUserImpl<U extends User> extends UserImpl implements S
     	if (!this.followedPeople.containsKey(circle)) {
     		this.followedPeople.put(circle, new LinkedList<>(Arrays.asList(user)));
     	} else {
-    		final var tempList = this.getFollowedUsersInGroup(circle);
+    		final var tempList = this.getFollowedUsersInGroupPrivate(circle);
     		for (final var i : tempList) {
     			if (i.equals(user)) {
     				return false;
     			}
     		}
-    		this.getFollowedUsersInGroup(circle).add(user);
+    		this.getFollowedUsersInGroupPrivate(circle).add(user);
     	}
         return true;
     }
 
+    private Collection<U> getFollowedUsersInGroupPrivate(final String groupName) {
+    	return this.followedPeople.containsKey(groupName) ? this.followedPeople.get(groupName) : new LinkedList<U>();
+    }
+    
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-        return this.followedPeople.get(groupName);
+    	final Collection<U> tempCollection = new LinkedList<>();
+    	for (final var i : this.getFollowedUsersInGroupPrivate(groupName)) {
+    		tempCollection.add(i);
+    	}
+    	
+        return tempCollection;
     }
 
     @Override
